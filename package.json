@@ -1,0 +1,43 @@
+{
+  "name": "mouse-word-highlight",
+  "displayName": "Mouse Word Highlight",
+  "description": "Highlights every occurrence of a word in the scrollbar overview ruler when you select it with the mouse — restores occurrence markers in vscode.dev where the semantic language service runs in partial mode.",
+  "version": "0.0.1",
+  "publisher": "luutuankiet",
+  "license": "MIT",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Other"],
+  "browser": "./dist/web/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "configuration": {
+      "title": "Mouse Word Highlight",
+      "properties": {
+        "mouseWordHighlight.triggerOnMouseOnly": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only highlight when a whole word is selected with the mouse. Turn off to also highlight whole-word selections made with the keyboard."
+        },
+        "mouseWordHighlight.maxMatches": {
+          "type": "number",
+          "default": 2000,
+          "description": "Safety cap on how many occurrences to decorate in very large files."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=.",
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@vscode/test-web": "^0.0.62",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2"
+  }
+}
